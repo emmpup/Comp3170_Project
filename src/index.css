@@ -1,0 +1,29 @@
+@import url("https://fonts.cdnfonts.com/css/satoshi");
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Satoshi", sans-serif;
+    color: #000;
+    font-weight: 100;
+
+    /* Background */
+    background: url(/public/backgrounds/classic-light.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/* Dark Mode (don't need to do now) */
+body .dark {
+    background: url(/public/backgrounds/classic-dark.png);
+    color: #fff;
+}

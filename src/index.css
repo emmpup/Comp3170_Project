@@ -16,7 +16,7 @@ body {
     font-weight: 100;
 
     /* Background */
-    background: url(/public/backgrounds/classic-light.png);
+    background: url(/backgrounds/classic-light.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -24,6 +24,6 @@ body {
 
 /* Dark Mode (don't need to do now) */
 body .dark {
-    background: url(/public/backgrounds/classic-dark.png);
+    background: url(/backgrounds/classic-dark.png);
     color: #fff;
 }

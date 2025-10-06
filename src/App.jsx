@@ -1,3 +1,4 @@
+import Player from "./components/Player";
 import "./App.css";
 
 function App() {
@@ -8,7 +9,9 @@ function App() {
                 <h1>October Playlist</h1>
                 <section>{/* Carousel */}</section>
 
-                <section>{/* player */}</section>
+                <section>
+                    <Player />
+                </section>
             </main>
         </div>
     );

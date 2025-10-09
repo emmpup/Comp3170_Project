@@ -1,8 +1,8 @@
-import { player } from "./player.module.css";
+import "./player.css";
 
 export default function Player() {
     return (
-        <div className={player}>
+        <div className='player'>
             <div className='buttons'>
                 <svg
                     className='prev btn'

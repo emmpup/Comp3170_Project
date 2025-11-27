@@ -1,4 +1,4 @@
-import "./player.css";
+import "./Player.css";
 import {
     useState,
     useEffect,

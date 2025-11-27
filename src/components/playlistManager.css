@@ -1,0 +1,288 @@
+.playlist-manager {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: "Satoshi", sans-serif;
+}
+
+.playlist-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.playlist-header h1 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: white;
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* 플레이어 섹션 */
+.player-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.player-header h3 {
+    margin: 0;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.close-player {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.close-player:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.video-player {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.video-player iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.player-info {
+    text-align: center;
+}
+
+.player-info h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 400;
+    color: white;
+}
+
+.player-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 플레이리스트 섹션 */
+.playlist-section {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.playlist-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.playlist-section-header h2 {
+    margin: 0;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+.clear-all-button {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.clear-all-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.empty-playlist {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.empty-playlist p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.playlist-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.playlist-item {
+    display: grid;
+    grid-template-columns: 20px 100px 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.75rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.playlist-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.item-number {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+.playlist-item .video-thumbnail {
+    padding-top: 0;
+    height: 56px;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.playlist-item .video-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.playlist-item .video-info {
+    padding: 0;
+    min-width: 0;
+}
+
+.playlist-item .video-title {
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
+    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.playlist-item .video-channel {
+    font-size: 0.8rem;
+    font-weight: 300;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.6);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.playlist-item .video-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0;
+}
+
+.playlist-item .play-button,
+.playlist-item .remove-button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    min-width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.playlist-item .play-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.playlist-item .remove-button:hover {
+    background: rgba(244, 67, 54, 0.3);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .playlist-manager {
+        padding: 0;
+    }
+
+    .playlist-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .player-section,
+    .playlist-section {
+        padding: 1rem;
+    }
+
+    .playlist-item {
+        grid-template-columns: 30px 80px 1fr;
+        gap: 0.75rem;
+        padding: 0.5rem;
+    }
+
+    .playlist-item .video-thumbnail {
+        height: 45px;
+    }
+
+    .playlist-item .video-actions {
+        grid-column: 1 / -1;
+        justify-content: stretch;
+    }
+
+    .item-number {
+        font-size: 0.9rem;
+    }
+}

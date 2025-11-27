@@ -7,26 +7,48 @@
     align-items: center;
     justify-content: center;
     padding: 2em;
-    border: 0.5px solid rgba(255, 255, 255, 0.4);
-    background: linear-gradient(
-        114deg,
-        rgba(255, 255, 255, 0.4) 38.38%,
-        rgba(255, 255, 255, 0.1) 98.95%
-    );
+    background: none;
+}
 
-    div {
-        display: flex;
-        align-items: center;
-    }
+.player > div:not(.slider) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-    div svg {
-        margin: 0.5em;
-    }
+.player svg {
+    margin: 0.5em;
+}
 
-    div div div {
-        margin: 0.5em;
-        border: 1px solid;
-        width: 5em;
-        position: absolute;
-    }
+.player .buttons div {
+    margin: 0.5em;
+    border: 1px solid;
+    width: 5em;
+    position: absolute;
+}
+
+.player span {
+    color: white;
+    font-family: "Satoshi", sans-serif;
+    font-weight: 300;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.slider {
+    position: relative;
+    width: 280px;
+    height: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    margin: 0.5em;
+    flex: 0 0 280px;
+    background-color: rgba(255, 255, 255, 0.6);
 }

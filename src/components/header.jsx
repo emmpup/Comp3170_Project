@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import youtubeService from "../services/youtubeService";
-import PlaylistManager from "./PlaylistManager";
-import "./Header.css";
+import PlaylistManager from "./playlistManager";
+import "./header.css";
 
 const Header = ({ onPlaySong, onStopSong }) => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);

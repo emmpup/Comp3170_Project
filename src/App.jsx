@@ -57,6 +57,7 @@ function App() {
                 onPlaySong={handleTrackSelect}
                 onStopSong={handleStopSong}
             />
+
             <main>
                 <h1>October Playlist</h1>
                 <section>

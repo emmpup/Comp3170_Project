@@ -1,10 +1,27 @@
-/* App.css */
+/* GENERAL LAYOUT */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    transition: background-image 0.4s ease;
+}
+
 main {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 6rem 1rem 2rem 1rem;
+    transition: background 0.3s ease;
 }
 
 h1 {
@@ -13,53 +30,132 @@ h1 {
     color: white;
     text-align: center;
     margin-bottom: 3rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-section {
-    width: 100%;
-    max-width: 1200px;
-    margin-bottom: 2rem;
-}
-
+/* EDIT BUTTON */
 .edit-button {
     position: fixed;
     bottom: 1em;
     left: 1em;
     background: none;
     border: none;
-    color: #fff;
+    color: white;
     cursor: pointer;
     font-size: 1rem;
+    transition: 0.2s ease;
 }
 
 .edit-button:hover {
+    opacity: 0.85;
     font-size: 1.1rem;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    main {
-        padding: 1rem 0.5rem;
-    }
+/* PLAYLIST TITLE */
+.playlist-title-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
 
-    h1 {
-        font-size: 2rem;
-        margin-bottom: 2rem;
-    }
+.playlist-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 40px;
+    color: white;
+}
 
-    .search-results-section {
-        padding: 1rem;
-    }
+/* Pencil icon */
+.rename-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.2s ease;
+}
 
-    .search-result-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.75rem;
-    }
+.rename-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
 
-    .result-thumbnail {
-        width: 100%;
-        height: 120px;
-    }
+.playlist-title-input {
+    font-size: 40px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    text-align: center;
+    color: white;
+    outline: none;
+}
+
+/* THEME SWITCHER BUTTON */
+.theme-select-container {
+    margin-bottom: 20px;
+}
+
+.theme-btn {
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.18);
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.theme-btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+
+.dark-mode h1,
+.dark-mode span,
+.dark-mode p,
+.dark-mode button,
+.dark-mode .playlist-title {
+    color: white !important;
+}
+
+.dark-mode svg,
+.dark-mode img.icon {
+    filter: invert(0);
+}
+
+
+.light-mode h1,
+.light-mode span,
+.light-mode p,
+.light-mode button,
+.light-mode .playlist-title {
+    color: black !important;
+}
+
+
+.light-mode svg,
+.light-mode img.icon {
+    filter: invert(1);
+}
+
+
+.light-mode .progress-bar-track {
+    background: rgba(0,0,0,0.3) !important;
+}
+
+.light-mode .progress-bar-fill {
+    background: black !important;
+}
+
+
+.light-mode .track-title,
+.light-mode .track-artist {
+    color: black !important;
+}
+
+
+.light-mode .icon-btn svg {
+    stroke: black !important;
 }

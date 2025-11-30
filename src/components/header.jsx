@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import youtubeService from "../services/youtubeService";
-import PlaylistManager from "./playlistManager";
-import "./header.css";
+import PlaylistManager from "./PlaylistManager";
+import "./Header.css";
 
 const Header = ({ onPlaySong, onStopSong }) => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -130,7 +130,7 @@ const Header = ({ onPlaySong, onStopSong }) => {
                     </svg>
                 </button>
                 <button className='icon-btn menu-btn' onClick={toggleMenu}>
-                    ☰
+                <span className='menu-icon'>☰</span>
                 </button>
             </header>
 

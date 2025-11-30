@@ -1,3 +1,4 @@
+/* HEADER + ICON BUTTONS */
 .header {
     position: fixed;
     top: 0;
@@ -15,8 +16,14 @@
     color: white;
     font-size: 1.5rem;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0;
     border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
     transition: background 0.3s ease;
 }
 
@@ -24,18 +31,27 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
+.menu-icon {
+    display: block;
+    font-size: 1.5rem;
+    line-height: 1;
+    position: relative;
+    top: -3px;
+}
+
+/* BASE SIDEBAR (SHARED) */
 .sidebar {
     position: fixed;
     top: 0;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.8);
+    box-shadow: inset 0px 0px 40px 40px rgba(30, 6, 59, 0.08);
     z-index: 999;
     padding: 5rem 2rem 2rem 2rem;
-    animation: slideIn 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .sidebar.closing {
-    animation: slideOut 0.3s ease forwards;
+    animation: all 0.3s ease forwards;
 }
 
 .sidebar.frosted-backdrop {
@@ -43,17 +59,30 @@
     -webkit-backdrop-filter: blur(10px) contrast(100%) brightness(100%);
 }
 
+/* SEARCH SIDEBAR (LEFT) */
 .search-sidebar {
     left: 0;
     width: 300px;
+    animation: slideInLeft 0.4s ease;
 }
 
+.search-sidebar.closing {
+    animation: slideOutLeft 0.4s ease forwards;
+}
+
+/* MENU SIDEBAR (RIGHT) */
 .menu-sidebar {
     right: 0;
     width: 450px;
     overflow-y: auto;
+    animation: slideInRight 0.4s ease;
 }
 
+.menu-sidebar.closing {
+    animation: slideOutRight 0.4s ease forwards;
+}
+
+/* MENU CONTENT */
 .menu-content {
     display: flex;
     flex-direction: column;
@@ -95,6 +124,7 @@
     overflow-y: auto;
 }
 
+/* BACK BUTTON */
 .back-button {
     background: rgba(255, 255, 255, 0.1);
     border: none;
@@ -111,6 +141,7 @@
     background: rgba(255, 255, 255, 0.2);
 }
 
+/* SEARCH AREA */
 .search-container {
     display: flex;
     align-items: center;
@@ -149,6 +180,7 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* TRACK & ALBUM UI */
 .album-placeholder {
     width: 40px;
     height: 40px;
@@ -208,7 +240,7 @@
 }
 
 .add-to-playlist-btn:hover {
-    background: rgba(76, 175, 80, 0.4);
+    background: rgba(97, 217, 101, 0.4);
     transform: scale(1.1);
 }
 
@@ -217,6 +249,7 @@
     transform: scale(1.1);
 }
 
+/* ALBUM GRID */
 .album-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -230,6 +263,7 @@
     border-radius: 4px;
 }
 
+/* FOOTER */
 .sidebar-footer {
     position: absolute;
     bottom: 2rem;
@@ -238,6 +272,7 @@
     font-size: 0.9rem;
 }
 
+/* STATUS MESSAGES */
 .loading-message,
 .error-message {
     color: white;
@@ -256,52 +291,57 @@
     border-radius: 4px;
 }
 
+/* EMPTY STATE */
 .empty-state {
     text-align: center;
     color: rgba(255, 255, 255, 0.6);
     padding: 2rem;
 }
 
-@keyframes slideIn {
+/* ANIMATIONS */
+
+/* Left side (search) */
+@keyframes slideInLeft {
     from {
         transform: translateX(-100%);
+        opacity: 0;
     }
     to {
         transform: translateX(0);
+        opacity: 1;
     }
 }
 
-@keyframes slideOut {
+@keyframes slideOutLeft {
     from {
         transform: translateX(0);
+        opacity: 1;
     }
     to {
         transform: translateX(-100%);
+        opacity: 0;
     }
 }
 
-.menu-sidebar {
-    animation: slideInRight 0.3s ease;
-}
-
-.menu-sidebar.closing {
-    animation: slideOutRight 0.3s ease forwards;
-}
-
+/* Right side (menu) */
 @keyframes slideInRight {
     from {
         transform: translateX(100%);
+        opacity: 0;
     }
     to {
         transform: translateX(0);
+        opacity: 1;
     }
 }
 
 @keyframes slideOutRight {
     from {
         transform: translateX(0);
+        opacity: 1;
     }
     to {
         transform: translateX(100%);
+        opacity: 0;
     }
 }

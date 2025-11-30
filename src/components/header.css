@@ -59,6 +59,14 @@
     -webkit-backdrop-filter: blur(10px) contrast(100%) brightness(100%);
 }
 
+body.light-mode .sidebar.frosted-backdrop {
+    background: rgba(255, 255, 255, 0.2); /* milky, frosted white */
+    backdrop-filter: blur(10px) brightness(100%) contrast(100%);
+    -webkit-backdrop-filter: blur(10px) brightness(100%) contrast(100%);
+    box-shadow: inset 0px 0px 40px 40px rgba(255, 255, 255, 0.08);
+    color: black; /* or white depending on your preference */
+}
+
 /* SEARCH SIDEBAR (LEFT) */
 .search-sidebar {
     left: 0;

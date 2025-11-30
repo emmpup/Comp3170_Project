@@ -105,7 +105,7 @@
 
 /* modal playlist section */
 .playlist-section {
-    background: rgba(82, 47, 47, 0.3);
+    background: rgba(14, 14, 14, 0.3);
     padding: 1.5rem;
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -292,12 +292,10 @@ body.light-mode .playlist-manager {
     color: black;
 }
 
-/* Header */
 body.light-mode .playlist-header h1 {
     color: black;
 }
 
-/* Player container */
 body.light-mode .player-section {
     background: rgba(255, 255, 255, 0.4);
 }
@@ -306,7 +304,6 @@ body.light-mode .player-header h3 {
     color: black;
 }
 
-/* Close button */
 body.light-mode .close-player {
     color: black;
     background: transparent;
@@ -316,7 +313,6 @@ body.light-mode .close-player:hover {
     background: rgba(116, 116, 116, 0.1);
 }
 
-/* Player title + channel text */
 body.light-mode .player-info h4 {
     color: black;
 }
@@ -325,17 +321,14 @@ body.light-mode .player-info p {
     color: rgba(0, 0, 0, 0.7);
 }
 
-/* Playlist section card */
 body.light-mode .playlist-section {
     background: rgba(255, 255, 255, 0.4);
 }
 
-/* Playlist section header */
 body.light-mode .playlist-section-header h2 {
     color: black;
 }
 
-/* Buttons */
 body.light-mode .clear-all-button {
     background: rgba(0, 0, 0, 0.05);
     color: black;
@@ -345,12 +338,10 @@ body.light-mode .clear-all-button:hover {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/* Empty state */
 body.light-mode .empty-playlist {
     color: rgba(0, 0, 0, 0.5);
 }
 
-/* Playlist items */
 body.light-mode .playlist-item {
     background: rgba(0, 0, 0, 0.05);
 }
@@ -359,12 +350,10 @@ body.light-mode .playlist-item:hover {
     background: rgba(0, 0, 0, 0.1);
 }
 
-/* Numbers */
 body.light-mode .item-number {
     color: rgba(0, 0, 0, 0.5);
 }
 
-/* Video titles + channels */
 body.light-mode .video-title {
     color: black;
 }
@@ -373,7 +362,6 @@ body.light-mode .video-channel {
     color: rgba(0, 0, 0, 0.6);
 }
 
-/* Play + remove buttons */
 body.light-mode .play-button,
 body.light-mode .remove-button {
     background: rgba(0, 0, 0, 0.05);

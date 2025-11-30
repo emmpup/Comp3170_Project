@@ -18,6 +18,10 @@
     margin-bottom: 2rem;
 }
 
+.empty-carousel {
+    text-align: center;
+}
+
 .carousel-track {
     display: flex;
     align-items: flex-end;
@@ -148,18 +152,15 @@
 }
 
 .track-title {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.4rem;
+    font-weight: 500;
     margin: 0 0 0.5rem 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .track-artist {
     font-size: 1rem;
     font-weight: 300;
     margin: 0;
-    opacity: 0.8;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .work-stage {
@@ -205,4 +206,11 @@
     .next-btn {
         right: 10px;
     }
+}
+
+/* DARK MODE — album delete button */
+body.dark-mode .album-delete {
+    background: rgba(255, 255, 255, 0.85);  
+    color: black !important;               
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); 
 }

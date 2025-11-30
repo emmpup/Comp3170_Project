@@ -70,7 +70,7 @@ body.light-mode .sidebar.frosted-backdrop {
 /* SEARCH SIDEBAR (LEFT) */
 .search-sidebar {
     left: 0;
-    width: 300px;
+    width: 350px;
     animation: slideInLeft 0.4s ease;
 }
 
@@ -81,7 +81,7 @@ body.light-mode .sidebar.frosted-backdrop {
 /* MENU SIDEBAR (RIGHT) */
 .menu-sidebar {
     right: 0;
-    width: 450px;
+    width: 4-0px;
     overflow-y: auto;
     animation: slideInRight 0.4s ease;
 }
@@ -178,7 +178,8 @@ body.light-mode .sidebar.frosted-backdrop {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
     transition: background 0.2s ease;
@@ -352,4 +353,27 @@ body.light-mode .sidebar.frosted-backdrop {
         transform: translateX(100%);
         opacity: 0;
     }
+}
+
+/* ================================
+   LIGHT MODE – SIDEBAR TEXT & ICONS
+================================ */
+
+body.light-mode .sidebar,
+body.light-mode .sidebar * {
+    color: black !important;
+    fill: black !important;
+}
+body.light-mode .search-input {
+    background: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    color: black;
+    padding: 0.3rem 0;
+}
+
+body.light-mode .search-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+body.light-mode .search-item:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
 }

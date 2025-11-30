@@ -15,7 +15,7 @@ function App() {
 
    
     const [playlistTitle, setPlaylistTitle] = useState(
-        localStorage.getItem("playlistTitle") || "October Playlist"
+        localStorage.getItem("playlistTitle") || "My Playlist"
     );
     const [isRenaming, setIsRenaming] = useState(false);
 

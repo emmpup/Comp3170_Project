@@ -85,6 +85,7 @@ const PlaylistManager = ({
     const savePlaylistTitle = () => {
         setIsEditingTitle(false);
         localStorage.setItem("playlistTitle", playlistTitle);
+        window.dispatchEvent(new Event("playlistTitleUpdated"));
     };
 
     const handleTitleKeyDown = (e) => {
@@ -101,24 +102,29 @@ const PlaylistManager = ({
     return (
         <div className='playlist-manager'>
             <div className='playlist-header'>
-                {isEditing && isEditingTitle ? (
-                    <input
-                        type='text'
-                        value={playlistTitle}
-                        onChange={(e) => setPlaylistTitle(e.target.value)}
-                        onBlur={savePlaylistTitle}
-                        onKeyDown={handleTitleKeyDown}
-                        className='playlist-title-input'
-                        autoFocus
-                    />
-                ) : (
-                    <h1
-                        onClick={() => isEditing && setIsEditingTitle(true)}
-                        style={{ cursor: isEditing ? "pointer" : "default" }}
-                    >
-                        {playlistTitle}
-                    </h1>
-                )}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    {isEditing && isEditingTitle ? (
+                        <input
+                            type='text'
+                            value={playlistTitle}
+                            onChange={(e) => setPlaylistTitle(e.target.value)}
+                            onBlur={savePlaylistTitle}
+                            onKeyDown={handleTitleKeyDown}
+                            className='playlist-title-input'
+                            autoFocus
+                        />
+                    ) : (
+                        <h1
+                            onClick={() => isEditing && setIsEditingTitle(true)}
+                            style={{ cursor: isEditing ? 'pointer' : 'default', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+                        >
+                            {playlistTitle}
+                            {isEditing && (
+                                <span title='Edit title' style={{ fontSize: '0.9rem', opacity: 0.7 }}>✎</span>
+                            )}
+                        </h1>
+                    )}
+                </div>
                 <button
                     onClick={() => setIsEditing && setIsEditing(!isEditing)}
                     className='edit-playlist-button'

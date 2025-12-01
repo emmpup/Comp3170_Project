@@ -34,6 +34,7 @@ h1 {
     margin: var(--spacing-lg) 0;
 }
 
+
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;

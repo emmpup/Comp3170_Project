@@ -1,11 +1,14 @@
 import { useState } from "react";
 import youtubeService from "../services/youtubeService";
-import PlaylistManager from "./PlaylistManager";
-import "./Header.css";
+import PlaylistManager from "./playlistManager";
+import "./header.css";
+import searchIcon from "../assets/material-symbols_search-rounded.svg";
+import menuIcon from "../assets/material-symbols_menu-rounded.svg";
 
 const Header = ({ onPlaySong, onStopSong }) => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     const [isSearchClosing, setIsSearchClosing] = useState(false);
     const [isMenuClosing, setIsMenuClosing] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -13,14 +16,26 @@ const Header = ({ onPlaySong, onStopSong }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [searchError, setSearchError] = useState(null);
     const [showPlaylistManager, setShowPlaylistManager] = useState(false);
+    const [notification, setNotification] = useState(null);
+
+    const showNotification = (message, type = "success") => {
+        setNotification({ message, type });
+        setTimeout(() => {
+            setNotification(null);
+        }, 2000);
+    };
+
+    const closeSearch = () => {
+        setIsSearchClosing(true);
+        setTimeout(() => {
+            setIsSearchOpen(false);
+            setIsSearchClosing(false);
+        }, 300);
+    };
 
     const toggleSearch = () => {
         if (isSearchOpen) {
-            setIsSearchClosing(true);
-            setTimeout(() => {
-                setIsSearchOpen(false);
-                setIsSearchClosing(false);
-            }, 300);
+            closeSearch();
         } else {
             setIsSearchOpen(true);
             if (isMenuOpen) {
@@ -33,14 +48,18 @@ const Header = ({ onPlaySong, onStopSong }) => {
         }
     };
 
+    const closeMenu = () => {
+        setIsMenuClosing(true);
+        setShowPlaylistManager(false);
+        setTimeout(() => {
+            setIsMenuOpen(false);
+            setIsMenuClosing(false);
+        }, 300);
+    };
+
     const toggleMenu = () => {
         if (isMenuOpen) {
-            setIsMenuClosing(true);
-            setShowPlaylistManager(false);
-            setTimeout(() => {
-                setIsMenuOpen(false);
-                setIsMenuClosing(false);
-            }, 300);
+            closeMenu();
         } else {
             setIsMenuOpen(true);
             setShowPlaylistManager(false);
@@ -98,136 +117,145 @@ const Header = ({ onPlaySong, onStopSong }) => {
         );
 
         if (exists) {
-            alert("This track is already in your playlist.");
+            showNotification(
+                "This track is already in your playlist.",
+                "error"
+            );
             return;
         }
 
         playlist.push(video);
         localStorage.setItem("myPlaylist", JSON.stringify(playlist));
 
-        // Dispatch custom event to notify Carousel of changes
         window.dispatchEvent(new Event("playlistUpdated"));
 
-        alert("Added to playlist!");
+        showNotification("Added to playlist!");
     };
 
     return (
         <>
             <header className='header'>
                 <button className='icon-btn search-btn' onClick={toggleSearch}>
-                    <svg
-                        width='20'
-                        height='20'
-                        viewBox='0 0 24 24'
-                        fill='none'
-                        stroke='currentColor'
-                        strokeWidth='2'
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                    >
-                        <circle cx='11' cy='11' r='8'></circle>
-                        <path d='m21 21-4.35-4.35'></path>
-                    </svg>
+                    <img src={searchIcon} alt='Search' width='24' height='24' />
                 </button>
                 <button className='icon-btn menu-btn' onClick={toggleMenu}>
-                <span className='menu-icon'>☰</span>
+                    <img src={menuIcon} alt='Menu' width='24' height='24' />
                 </button>
             </header>
 
             {isSearchOpen && (
-                <div
-                    className={`sidebar search-sidebar frosted-backdrop ${
-                        isSearchClosing ? "closing" : ""
-                    }`}
-                >
-                    <form onSubmit={handleSearch} className='search-container'>
-                        <input
-                            type='text'
-                            placeholder='Search for music...'
-                            className='search-input'
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                    </form>
+                <>
+                    <div className='sidebar-overlay' onClick={closeSearch} />
+                    <div
+                        className={`sidebar search-sidebar frosted-backdrop ${
+                            isSearchClosing ? "closing" : ""
+                        }`}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <form
+                            onSubmit={handleSearch}
+                            className='search-container'
+                        >
+                            <input
+                                type='text'
+                                placeholder='Search for music...'
+                                className='search-input'
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                        </form>
 
-                    {isLoading && (
-                        <div className='loading-message'>Searching...</div>
-                    )}
+                        {isLoading && (
+                            <div className='loading-message'>Searching...</div>
+                        )}
 
-                    {searchError && (
-                        <div className='error-message'>{searchError}</div>
-                    )}
+                        {searchError && (
+                            <div className='error-message'>{searchError}</div>
+                        )}
 
-                    {searchResults.length > 0 && (
-                        <div className='search-results'>
-                            {searchResults.map((item, index) => (
-                                <div
-                                    key={item.id.videoId}
-                                    className='search-item'
-                                    onClick={() => handleVideoSelect(item)}
-                                >
-                                    <img
-                                        src={
-                                            item.snippet.thumbnails?.medium
-                                                ?.url ||
-                                            "/default-thumbnail.png"
-                                        }
-                                        alt={item.snippet.title}
-                                        className='album-placeholder'
-                                    />
-                                    <div className='track-info'>
-                                        <div className='song-name'>
-                                            {item.snippet.title}
-                                        </div>
-                                        <div className='artist-name'>
-                                            {item.snippet.channelTitle}
-                                        </div>
-                                    </div>
-                                    <div className='action-buttons'>
-                                        <button
-                                            className='add-to-playlist-btn'
-                                            onClick={(e) =>
-                                                addToPlaylist(item, e)
+                        {searchResults.length > 0 && (
+                            <div className='search-results'>
+                                {searchResults.map((item, index) => (
+                                    <div
+                                        key={item.id.videoId}
+                                        className='search-item'
+                                        onClick={() => handleVideoSelect(item)}
+                                    >
+                                        <img
+                                            src={
+                                                item.snippet.thumbnails?.medium
+                                                    ?.url ||
+                                                "/default-thumbnail.png"
                                             }
-                                            title='Add to playlist'
-                                        >
-                                            ➕
-                                        </button>
-                                        <button
-                                            className='play-btn'
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                handleVideoSelect(item);
-                                            }}
-                                        >
-                                            ▶
-                                        </button>
+                                            alt={item.snippet.title}
+                                            className='album-placeholder'
+                                        />
+                                        <div className='track-info'>
+                                            <div className='song-name'>
+                                                {item.snippet.title}
+                                            </div>
+                                            <div className='artist-name'>
+                                                {item.snippet.channelTitle}
+                                            </div>
+                                        </div>
+                                        <div className='action-buttons'>
+                                            <button
+                                                className='add-to-playlist-btn'
+                                                onClick={(e) =>
+                                                    addToPlaylist(item, e)
+                                                }
+                                                title='Add to playlist'
+                                            >
+                                                ➕
+                                            </button>
+                                            <button
+                                                className='play-btn'
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleVideoSelect(item);
+                                                }}
+                                            >
+                                                ▶
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-
-                    {searchResults.length === 0 &&
-                        !isLoading &&
-                        !searchError && (
-                            <div className='empty-state'>
-                                <p>Search for your favorite music</p>
+                                ))}
                             </div>
                         )}
-                </div>
+
+                        {searchResults.length === 0 &&
+                            !isLoading &&
+                            !searchError && (
+                                <div className='empty-state'>
+                                    <p>Search for your favorite music</p>
+                                </div>
+                            )}
+                    </div>
+                </>
             )}
 
             {isMenuOpen && (
-                <div
-                    className={`sidebar menu-sidebar frosted-backdrop ${
-                        isMenuClosing ? "closing" : ""
-                    }`}
-                >
-                    <PlaylistManager
-                        onPlaySong={onPlaySong}
-                        onStopSong={onStopSong}
-                    />
+                <>
+                    <div className='sidebar-overlay' onClick={closeMenu} />
+                    <div
+                        className={`sidebar menu-sidebar frosted-backdrop ${
+                            isMenuClosing ? "closing" : ""
+                        }`}
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <PlaylistManager
+                            onPlaySong={onPlaySong}
+                            onStopSong={onStopSong}
+                            isEditing={isEditing}
+                            setIsEditing={setIsEditing}
+                        />
+                    </div>
+                </>
+            )}
+
+            {notification && (
+                <div className={`notification-modal ${notification.type}`}>
+                    {notification.message}
                 </div>
             )}
         </>

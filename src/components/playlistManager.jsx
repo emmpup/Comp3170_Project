@@ -2,13 +2,21 @@ import { useState, useEffect, useRef } from "react";
 import youtubeService from "../services/youtubeService";
 import "./playlistManager.css";
 
-const PlaylistManager = ({ onPlaySong, onStopSong }) => {
+const PlaylistManager = ({
+    onPlaySong,
+    onStopSong,
+    isEditing = false,
+    setIsEditing,
+}) => {
     const [playlist, setPlaylist] = useState([]);
     const [currentlyPlaying, setCurrentlyPlaying] = useState(null);
     const isExternalUpdateRef = useRef(false);
+    const [playlistTitle, setPlaylistTitle] = useState(
+        localStorage.getItem("playlistTitle") || "My Playlist"
+    );
+    const [isEditingTitle, setIsEditingTitle] = useState(false);
 
     useEffect(() => {
-        // Load playlist from localStorage on mount
         const loadPlaylist = () => {
             const savedPlaylist = localStorage.getItem("myPlaylist");
             if (savedPlaylist) {
@@ -24,7 +32,6 @@ const PlaylistManager = ({ onPlaySong, onStopSong }) => {
 
         loadPlaylist();
 
-        // Listen for playlist updates from other components (Header)
         window.addEventListener("playlistUpdated", loadPlaylist);
 
         return () => {
@@ -33,14 +40,12 @@ const PlaylistManager = ({ onPlaySong, onStopSong }) => {
     }, []);
 
     useEffect(() => {
-        // Skip writing to localStorage if this is an external update
         if (isExternalUpdateRef.current) {
             isExternalUpdateRef.current = false;
             return;
         }
 
         localStorage.setItem("myPlaylist", JSON.stringify(playlist));
-        // Dispatch event to notify other components of changes
         window.dispatchEvent(new Event("playlistUpdated"));
     }, [playlist]);
 
@@ -49,19 +54,15 @@ const PlaylistManager = ({ onPlaySong, onStopSong }) => {
         const currentVideoId =
             currentlyPlaying?.id?.videoId || currentlyPlaying?.id;
 
-        // If clicking the same video, toggle it off (pause)
         if (currentVideoId === videoId) {
             setCurrentlyPlaying(null);
-            // Call stop callback to stop the carousel player
             if (onStopSong) {
                 onStopSong();
             }
             return;
         }
 
-        // Otherwise, play the new video
         setCurrentlyPlaying(video);
-        // Find the index of the video in the playlist and call the callback
         if (onPlaySong) {
             const index = playlist.findIndex((item) => {
                 const id = item.id?.videoId || item.id;
@@ -73,10 +74,57 @@ const PlaylistManager = ({ onPlaySong, onStopSong }) => {
         }
     };
 
+    const deleteFromPlaylist = (videoId) => {
+        const updatedPlaylist = playlist.filter((item) => {
+            const id = item.id?.videoId || item.id;
+            return id !== videoId;
+        });
+        setPlaylist(updatedPlaylist);
+    };
+
+    const savePlaylistTitle = () => {
+        setIsEditingTitle(false);
+        localStorage.setItem("playlistTitle", playlistTitle);
+    };
+
+    const handleTitleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            savePlaylistTitle();
+        } else if (e.key === "Escape") {
+            setPlaylistTitle(
+                localStorage.getItem("playlistTitle") || "My Playlist"
+            );
+            setIsEditingTitle(false);
+        }
+    };
+
     return (
         <div className='playlist-manager'>
             <div className='playlist-header'>
-                <h1>My Playlist</h1>
+                {isEditing && isEditingTitle ? (
+                    <input
+                        type='text'
+                        value={playlistTitle}
+                        onChange={(e) => setPlaylistTitle(e.target.value)}
+                        onBlur={savePlaylistTitle}
+                        onKeyDown={handleTitleKeyDown}
+                        className='playlist-title-input'
+                        autoFocus
+                    />
+                ) : (
+                    <h1
+                        onClick={() => isEditing && setIsEditingTitle(true)}
+                        style={{ cursor: isEditing ? "pointer" : "default" }}
+                    >
+                        {playlistTitle}
+                    </h1>
+                )}
+                <button
+                    onClick={() => setIsEditing && setIsEditing(!isEditing)}
+                    className='edit-playlist-button'
+                >
+                    {isEditing ? "Done" : "Edit"}
+                </button>
             </div>
 
             {currentlyPlaying && (
@@ -145,24 +193,37 @@ const PlaylistManager = ({ onPlaySong, onStopSong }) => {
                                         </p>
                                     </div>
                                     <div className='video-actions'>
-                                        <button
-                                            onClick={() => playVideo(video)}
-                                            className='play-button'
-                                            title={
-                                                (currentlyPlaying?.id
+                                        {isEditing ? (
+                                            <button
+                                                onClick={() =>
+                                                    deleteFromPlaylist(videoId)
+                                                }
+                                                className='delete-button'
+                                                title='Delete'
+                                            >
+                                                ✕
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={() => playVideo(video)}
+                                                className='play-button'
+                                                title={
+                                                    (currentlyPlaying?.id
+                                                        ?.videoId ||
+                                                        currentlyPlaying?.id) ===
+                                                    videoId
+                                                        ? "Pause"
+                                                        : "Play"
+                                                }
+                                            >
+                                                {(currentlyPlaying?.id
                                                     ?.videoId ||
                                                     currentlyPlaying?.id) ===
                                                 videoId
-                                                    ? "Pause"
-                                                    : "Play"
-                                            }
-                                        >
-                                            {(currentlyPlaying?.id?.videoId ||
-                                                currentlyPlaying?.id) ===
-                                            videoId
-                                                ? "⏸"
-                                                : "▶"}
-                                        </button>
+                                                    ? "⏸"
+                                                    : "▶"}
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             );

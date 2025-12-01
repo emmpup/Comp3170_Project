@@ -1,13 +1,36 @@
 .player {
-    border-radius: 40px;
+    border-radius: var(--border-radius-xxl);
     width: 40rem;
+    max-width: 90%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2em;
+    padding: var(--spacing-lg);
     background: none;
+    min-height: 100px;
+}
+
+@media (max-width: 768px) {
+    .player {
+        width: 100%;
+        padding: var(--spacing-sm);
+        min-height: 80px;
+    }
+
+    .slider {
+        width: 180px !important;
+        flex: 0 0 180px !important;
+    }
+
+    .player span {
+        font-size: var(--font-size-sm);
+    }
+
+    .player svg {
+        margin: 0.3em;
+    }
 }
 
 .player > div:not(.slider) {
@@ -20,17 +43,10 @@
     margin: 0.5em;
 }
 
-.player .buttons div {
-    margin: 0.5em;
-    border: 1px solid;
-    width: 5em;
-    position: absolute;
-}
-
 .player span {
-    color: white;
+    color: var(--text-primary);
     font-family: "Satoshi", sans-serif;
-    font-weight: 300;
+    font-weight: var(--font-weight-light);
 }
 
 .bar {
@@ -50,5 +66,6 @@
     border: none;
     margin: 0.5em;
     flex: 0 0 280px;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: var(--text-secondary);
 }
+

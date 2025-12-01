@@ -1,4 +1,5 @@
 @import url("https://fonts.cdnfonts.com/css/satoshi");
+@import "./styles/variables.css";
 
 :root {
     --_gradient-blend-mode: normal;
@@ -17,7 +18,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Satoshi", sans-serif;
-    color: #fff;
+    color: var(--text-primary);
     font-weight: 300;
 }
 
@@ -30,6 +31,24 @@ body {
         radial-gradient(at 86% 44%, #7052f3 0px, transparent 50%),
         radial-gradient(at 88% 39%, #c052f3 0px, transparent 50%) #030303;
     mix-blend-mode: var(--_gradient-blend-mode);
+}
+
+/* Light mode: set global text color to black */
+body.light-mode {
+    color: var(--text-primary);
+}
+
+/* Theme variable aliases */
+body.dark-mode {
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --text-muted: var(--text-muted-dark);
+}
+
+body.light-mode {
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --text-muted: var(--text-muted-light);
 }
 
 .frosted-backdrop {

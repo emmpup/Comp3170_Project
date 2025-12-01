@@ -24,7 +24,6 @@ const Carousel = ({
     const durationCacheRef = useRef({});
 
     useEffect(() => {
-        // Load playlist from localStorage
         const savedPlaylist = localStorage.getItem("myPlaylist");
         if (savedPlaylist) {
             try {
@@ -33,7 +32,6 @@ const Carousel = ({
                 if (onPlaylistLoad) {
                     onPlaylistLoad(items);
                 }
-                // Auto-play first song on initial load
                 setIsInitialLoad(false);
             } catch (error) {
                 console.error(
@@ -45,7 +43,6 @@ const Carousel = ({
             setIsInitialLoad(false);
         }
 
-        // Listen for storage changes (from other tabs/windows)
         const handleStorageChange = (e) => {
             if (e.key === "myPlaylist") {
                 const items = e.newValue ? JSON.parse(e.newValue) : [];
@@ -56,7 +53,6 @@ const Carousel = ({
             }
         };
 
-        // Listen for custom playlist update event (from same window)
         const handlePlaylistUpdated = () => {
             const savedPlaylist = localStorage.getItem("myPlaylist");
             if (savedPlaylist) {
@@ -95,7 +91,6 @@ const Carousel = ({
     useEffect(() => {
         if (shouldStop && !stopProcessedRef.current) {
             stopProcessedRef.current = true;
-            // Pause the player instead of stopping it
             if (playerRef.current && playerRef.current.pauseVideo) {
                 playerRef.current.pauseVideo();
             }
@@ -112,7 +107,6 @@ const Carousel = ({
         if (albumData.length > 0) {
             const currentAlbum = albumData[currentIndex];
             if (currentAlbum) {
-                // Handle both YouTube search result format (id.videoId) and YouTube playlist format (snippet.resourceId.videoId)
                 const videoId =
                     currentAlbum.id?.videoId ||
                     currentAlbum.snippet?.resourceId?.videoId ||
@@ -120,9 +114,7 @@ const Carousel = ({
                 if (videoId) {
                     setCurrentVideoId(videoId);
 
-                    // Fetch video details to get duration
                     const fetchVideoDuration = async () => {
-                        // Check cache first
                         if (durationCacheRef.current[videoId] !== undefined) {
                             setCurrentDuration(
                                 durationCacheRef.current[videoId]
@@ -140,7 +132,6 @@ const Carousel = ({
                                         ?.duration;
 
                                 if (duration) {
-                                    // Parse ISO 8601 duration format (e.g., "PT4M33S")
                                     const match = duration.match(
                                         /PT(\d+H)?(\d+M)?(\d+S)?/
                                     );
@@ -172,7 +163,6 @@ const Carousel = ({
 
                     fetchVideoDuration();
 
-                    // Auto-play first song on initial page load
                     if (isInitialLoad && onTrackSelect) {
                         onTrackSelect(currentAlbum, currentIndex);
                     }
@@ -264,7 +254,6 @@ const Carousel = ({
     const handleDeleteFromPlaylist = (videoId, e) => {
         e.stopPropagation();
 
-        // Find the video to delete - handle both YouTube playlist format and search result format
         const videoToDelete = albumData.find((item) => {
             const id = item.id?.videoId || item.id;
             return id === videoId;
@@ -280,7 +269,6 @@ const Carousel = ({
         setAlbumData(updatedPlaylist);
         localStorage.setItem("myPlaylist", JSON.stringify(updatedPlaylist));
 
-        // Reset index if needed
         if (
             currentIndex >= updatedPlaylist.length &&
             updatedPlaylist.length > 0

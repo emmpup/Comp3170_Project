@@ -1,7 +1,7 @@
 import "./carousel.css";
 import { useState, useEffect, useRef } from "react";
 import youtubeService from "../services/youtubeService";
-import Player from "./player";
+import Player from "./Player";
 
 const Carousel = ({
     isEditing = false,

@@ -11,6 +11,9 @@ function App() {
     const [shouldStop, setShouldStop] = useState(false);
 
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+    const [playlistTitle, setPlaylistTitle] = useState(
+        localStorage.getItem("playlistTitle") || "My Playlist"
+    );
 
     useEffect(() => {
         if (theme === "dark") {
@@ -27,6 +30,14 @@ function App() {
 
         localStorage.setItem("theme", theme);
     }, [theme]);
+
+    useEffect(() => {
+        const handleTitleUpdated = () => {
+            setPlaylistTitle(localStorage.getItem("playlistTitle") || "My Playlist");
+        };
+        window.addEventListener("playlistTitleUpdated", handleTitleUpdated);
+        return () => window.removeEventListener("playlistTitleUpdated", handleTitleUpdated);
+    }, []);
 
     const handleTrackSelect = (track, index) => {
         setCurrentTrack(track);
@@ -49,7 +60,7 @@ function App() {
             />
 
             <main>
-                <h1 className='playlist-title'>My Playlist</h1>
+                <h1 className='playlist-title'>{playlistTitle}</h1>
 
                 <section>
                     <Carousel

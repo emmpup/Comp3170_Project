@@ -1,7 +1,7 @@
 import { useState } from "react";
 import youtubeService from "../services/youtubeService";
 import PlaylistManager from "./playlistManager";
-import "./Header.css";
+import "./header.css";
 import searchIcon from "../assets/material-symbols_search-rounded.svg";
 import menuIcon from "../assets/material-symbols_menu-rounded.svg";
 

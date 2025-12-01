@@ -1,0 +1,83 @@
+:root {
+    --color-white: white;
+    --color-black: black;
+
+    --bg-glass-dark: rgba(255, 255, 255, 0.1);
+    --bg-glass-darker: rgba(0, 0, 0, 0.25);
+    --bg-glass-light: rgba(255, 255, 255, 0.05);
+    --bg-glass-dark-hover: rgba(255, 255, 255, 0.2);
+
+    --bg-light-glass: rgba(0, 0, 0, 0.05);
+    --bg-light-glass-hover: rgba(0, 0, 0, 0.1);
+    --bg-light-section: rgba(255, 255, 255, 0.4);
+    --bg-dark-section: rgba(14, 14, 14, 0.3);
+
+    --text-primary-dark: white;
+    --text-primary-light: black;
+    --text-secondary-dark: rgba(255, 255, 255, 0.6);
+    --text-secondary-light: rgba(0, 0, 0, 0.6);
+    --text-muted-dark: rgba(255, 255, 255, 0.5);
+    --text-muted-light: rgba(0, 0, 0, 0.5);
+
+    --border-dark: rgba(255, 255, 255, 0.3);
+    --border-dark-hover: rgba(255, 255, 255, 0.5);
+    --border-light: rgba(0, 0, 0, 0.2);
+    --border-light-hover: rgba(0, 0, 0, 0.3);
+    --border-transparent: rgba(255, 255, 255, 0.1);
+    --border-light-transparent: rgba(0, 0, 0, 0.1);
+
+    --color-success: rgba(76, 175, 80, 0.95);
+    --color-error: rgba(244, 67, 54, 0.95);
+    --color-error-hover: rgba(244, 67, 54, 0.2);
+
+    --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --shadow-modal-dark: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --shadow-modal-light: 0 8px 32px rgba(0, 0, 0, 0.2);
+    --shadow-button: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-inset-dark: inset 0px 0px 40px 40px rgba(30, 6, 59, 0.08);
+    --shadow-inset-light: inset 0px 0px 40px 40px rgba(255, 255, 255, 0.08);
+
+    --backdrop-blur: blur(10px);
+    --backdrop-blur-strong: blur(20px);
+    --backdrop-saturate: saturate(140%);
+    --backdrop-brightness: brightness(100%);
+    --backdrop-contrast: contrast(100%);
+
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-xl: 20px;
+    --border-radius-xxl: 40px;
+    --border-radius-round: 50%;
+
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 0.75rem;
+    --spacing-lg: 1rem;
+    --spacing-xl: 1.5rem;
+    --spacing-2xl: 2rem;
+    --spacing-3xl: 3rem;
+
+    --font-size-xs: 0.8rem;
+    --font-size-sm: 0.9rem;
+    --font-size-base: 1rem;
+    --font-size-md: 1.1rem;
+    --font-size-lg: 1.4rem;
+    --font-size-xl: 2rem;
+    --font-size-2xl: 2.5rem;
+
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.4s ease;
+    --transition-slider: 0.5s ease;
+
+    --z-sidebar: 999;
+    --z-overlay: 998;
+    --z-header: 1000;
+    --z-modal: 10000;
+    --z-delete-btn: 10;
+}

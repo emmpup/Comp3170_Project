@@ -36,7 +36,6 @@ const Player = forwardRef(
             },
         }));
 
-        // Load YouTube IFrame API
         useEffect(() => {
             if (window.YT) {
                 setApiReady(true);
@@ -53,13 +52,11 @@ const Player = forwardRef(
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         }, []);
 
-        // Initialize player when container is ready
         useEffect(() => {
             const initializePlayer = () => {
                 if (!window.YT || !window.YT.Player || !containerRef.current)
                     return;
 
-                // Only create player once
                 if (playerRef.current) return;
 
                 playerRef.current = new window.YT.Player(containerRef.current, {
@@ -73,9 +70,7 @@ const Player = forwardRef(
                         origin: window.location.origin,
                     },
                     events: {
-                        onReady: () => {
-                            // Player is ready
-                        },
+                        onReady: () => {},
                         onStateChange: (event) => {
                             if (event.data === window.YT.PlayerState.PLAYING) {
                                 setIsPlayingLocal(true);
@@ -107,7 +102,6 @@ const Player = forwardRef(
             }
         }, [apiReady, containerRef.current]);
 
-        // Load video when videoId changes
         useEffect(() => {
             if (!playerRef.current || !videoId) return;
 
@@ -120,7 +114,6 @@ const Player = forwardRef(
             }
         }, [videoId]);
 
-        // Update elapsed time while playing
         useEffect(() => {
             if (!isPlayingLocal || !playerRef.current) return;
 
@@ -136,14 +129,12 @@ const Player = forwardRef(
             return () => clearInterval(interval);
         }, [isPlayingLocal]);
 
-        // Update duration when initialDuration prop changes
         useEffect(() => {
             if (initialDuration && initialDuration > 0) {
                 setDuration(initialDuration);
             }
         }, [initialDuration]);
 
-        // Handle play/pause based on isPlaying prop
         useEffect(() => {
             if (!playerRef.current) return;
 

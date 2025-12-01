@@ -5,7 +5,7 @@
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 0;
 }
 
 .carousel {
@@ -14,8 +14,8 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 300px;
-    margin-bottom: 2rem;
+    height: 250px;
+    margin-bottom: var(--spacing-sm);
 }
 
 .empty-carousel {
@@ -26,7 +26,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--spacing-lg);
     width: 100%;
     height: 100%;
     perspective: 1000px;
@@ -34,10 +34,10 @@
 
 .album-cover {
     position: relative;
-    transition: all 0.5s ease;
+    transition: all var(--transition-slider);
     cursor: pointer;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-dark);
 }
 
 .album-cover.center {
@@ -69,7 +69,7 @@
     background: rgba(255, 255, 255, 0.9);
     color: #333;
     border: none;
-    border-radius: 50%;
+    border-radius: var(--border-radius-round);
     width: 24px;
     height: 24px;
     display: flex;
@@ -78,9 +78,9 @@
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.2s ease;
+    z-index: var(--z-delete-btn);
+    box-shadow: var(--shadow-button);
+    transition: all var(--transition-fast);
 }
 
 .album-delete:hover {
@@ -91,15 +91,15 @@
 .placeholder-cover {
     width: 100%;
     height: 100%;
-    background: white;
+    background: var(--color-white);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--color-white);
     font-weight: bold;
     text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
+    padding: var(--spacing-lg);
+    font-size: var(--font-size-sm);
 }
 
 .placeholder-cover span {
@@ -112,29 +112,29 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
 }
+
 
 .carousel-btn {
     background: none;
     border: none;
-    color: white;
+    color: var(--text-primary);
     font-size: 2rem;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: var(--border-radius-round);
     cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 10;
+    transition: all var(--transition-base);
+    z-index: var(--z-delete-btn);
     padding: 0;
     margin: 0;
     flex-shrink: 0;
     display: flex;
     justify-content: center;
 }
-
 .carousel-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: var(--bg-glass-dark-hover);
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -148,69 +148,119 @@
 
 .current-track-info {
     text-align: center;
-    color: white;
+    color: var(--text-primary);
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 var(--spacing-2xl);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
+.placeholder-cover {
+    width: 100%;
+    height: 100%;
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    font-weight: bold;
+    text-align: center;
+    padding: var(--spacing-lg);
+    font-size: var(--font-size-sm);
+}
 .track-title {
-    font-size: 1.4rem;
-    font-weight: 500;
-    margin: 0 0 0.5rem 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    margin: 0 0 var(--spacing-sm) 0;
+    height: 2rem;
+    line-height: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
 
 .track-artist {
-    font-size: 1rem;
-    font-weight: 300;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-light);
     margin: 0;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
 }
 
 .work-stage {
-    width: 80%;
+    width: 100%;
+    max-width: 700px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    margin-top: 1rem;
+    justify-content: center;
+    gap: var(--spacing-2xl);
+    margin: var(--spacing-lg) auto 0;
+    height: 100px;
+    position: relative;
 }
 
 .work-stage .carousel-btn {
-    position: static;
+    position: absolute;
     transform: none;
     margin: 0;
+    flex-shrink: 0;
+}
+
+.work-stage .prev-btn {
+    left: 0;
+}
+
+.work-stage .next-btn {
+    right: 0;
+}
+
+.work-stage .current-track-info {
+    flex: 0 0 auto;
+    max-width: 500px;
 }
 
 @media (max-width: 768px) {
     .carousel {
-        height: 250px;
+        height: 200px;
     }
 
     .album-cover.center {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
     }
 
     .album-cover.side {
-        width: 80px;
-        height: 80px;
+        width: 70px;
     }
 
     .carousel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
+        width: 35px;
+        height: 35px;
+        font-size: 1.3rem;
     }
 
     .prev-btn {
-        left: 10px;
+        left: 5px;
     }
 
     .next-btn {
-        right: 10px;
+        right: 5px;
     }
-}
 
-/* DARK MODE — album delete button */
-body.dark-mode .album-delete {
-    background: rgba(255, 255, 255, 0.85);  
-    color: black !important;               
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); 
+    .track-title {
+        font-size: 1.1rem;
+    }
+
+    .track-artist {
+        font-size: 0.9rem;
+    }
 }
